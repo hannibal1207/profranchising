@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.2",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.0"
   }
 }
