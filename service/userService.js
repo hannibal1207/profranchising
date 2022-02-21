@@ -26,7 +26,6 @@ const createUSers = async ({ name, email, password }) => {
 		name,
 		email,
 		password,
-		role: 'user',
 	};
   
 	const verifica = verificaCampos(name, email, password);
