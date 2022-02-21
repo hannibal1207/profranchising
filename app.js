@@ -12,5 +12,7 @@ app.use(bodyParser.json());
 app.post('/cadastro', usersController.createUSers);
 app.post('/login', loginController.login);
 app.post('/products', productsController.createProduct);
+app.get('/products', productsController.getProduct);
+app.get('/products/:_id', productsController.getProductById);
 
 app.listen(3000, () => console.log(`app rodando na porta ${3000}`));

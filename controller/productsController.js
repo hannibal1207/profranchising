@@ -6,4 +6,16 @@ const createProduct = async(req, res) => {
 	res.status(201).json(create);
 };
 
-module.exports = {createProduct};
+const getProduct = async(req, res) => {
+	const get = await productService.getProduct();
+	return res.status(200).json(get);
+};
+
+const getProductById = async(req, res) => {
+	const { _id } = req.params;
+	const findId = await productService.getProductById(_id);
+	if (findId.message) return res.status(findId.code).json(findId.message);
+	return res.status(200).json(findId);
+};
+
+module.exports = {createProduct, getProduct, getProductById};
