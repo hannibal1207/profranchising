@@ -29,4 +29,20 @@ const createProduct = async({ name, price, ingredients, image }) => {
 	return create;
 };
 
-module.exports = {createProduct};
+const getProduct = async() => {
+	const get = await productsModel.getProduct();
+	return get;
+};
+
+const getProductById = async(_id) => {
+	const findId = await productsModel.getProductById(_id);
+	if (!findId) {
+		return {
+			code: 404,
+			message: 'product not found'
+		};
+	}
+	return findId;
+};
+
+module.exports = {createProduct, getProduct, getProductById};
