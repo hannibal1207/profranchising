@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const loginService = require('../service/loginService');
+require('dotenv').config();
 
-const secret = 'meusegredo';
+const secret = process.env.SECRET_KEY;
 
 const login = async (req, res) => {
 	const { email, password } = req.body;
