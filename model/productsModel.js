@@ -1,5 +1,5 @@
-const connection = require('./connection');
 const { ObjectId } = require('mongodb');
+const connection = require('./connection');
 
 const createProduct = async(product) => {
 	const db = await connection();
@@ -19,4 +19,19 @@ const getProductById = async(_id) => {
 	return findById;
 };
 
-module.exports = {createProduct, getProduct, getProductById};
+const deleteProduct = async(_id) => {
+	const db = await connection();
+	const deletee = db.collection('products').deleteOne(
+		{
+			_id: ObjectId(_id) }
+	);
+	return deletee;
+};
+
+const editProduct = async(_id, name, price, ingredients, image) => {
+	const db = await connection();
+	const edit = db.collection('products').updateOne( { _id: ObjectId(_id) }, { $set: {name, price, ingredients, image } } );
+	return edit;
+};
+
+module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProduct };
