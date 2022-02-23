@@ -38,8 +38,11 @@ app.put('/products/:_id', auth.validateJWT, productsController.editProduct);
 app.delete('/products/:_id', auth.validateJWT, productsController.deleteProduct);
 app.put('/products/:_id/image', auth.validateJWT, uploadd.single('image'), upload.uploadMiddleware);
 
-app.post('/invetory', invetoryController.createInvetory);
+app.post('/invetory', auth.validateJWT, invetoryController.createInvetory);
 app.get('/invetory', invetoryController.getInvetory);
+app.get('/invetory/:_id', invetoryController.getInvetoryById);
+app.put('/invetory/:_id', auth.validateJWT, invetoryController.editInvetory);
+app.delete('/invetory/:_id', auth.validateJWT, invetoryController.deleteInvetory);
 
 app.get('/prodcutsandingredient', productsController.getProductAndIngredient);
 
