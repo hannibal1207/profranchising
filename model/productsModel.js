@@ -34,4 +34,19 @@ const editProduct = async(_id, name, price, ingredients, image) => {
 	return edit;
 };
 
-module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProduct };
+const productAndIngredient = async() => {
+	const db = await connection();
+	const productAndIngredient = db.collection('products').aggregate([
+		{
+			$lookup: {
+				from: 'inventory',
+				localField: 'ingredients',
+				foreignField: 'ingredient',
+				as: 'productAndIngredient'
+			}
+		}
+	]).toArray();
+	return productAndIngredient;
+};
+
+module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProduct, productAndIngredient };

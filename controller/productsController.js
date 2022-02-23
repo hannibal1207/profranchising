@@ -31,4 +31,9 @@ const editProduct = async(req, res) => {
 	return res.status(201).json(edit);
 };
 
-module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProduct };
+const getProductAndIngredient = async(req, res) => {
+	const get = await productService.getProductAndIngredient();
+	return res.status(200).json(get);
+};
+
+module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProduct, getProductAndIngredient };
