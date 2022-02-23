@@ -7,6 +7,7 @@ const multer = require('multer');
 const usersController = require('./controller/userController');
 const loginController = require('./controller/loginController');
 const productsController = require('./controller/productsController');
+const invetoryController = require('./controller/invetoryController');
 const auth = require('./middleware/auth');
 const upload = require('./middleware/upload');
 
@@ -27,12 +28,19 @@ const uploadd = multer({ storage });
 app.use('uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.post('/cadastro', usersController.createUSers);
+
 app.post('/login', loginController.login);
+
 app.post('/products', auth.validateJWT,  productsController.createProduct);
 app.get('/products', productsController.getProduct);
 app.get('/products/:_id', productsController.getProductById);
 app.put('/products/:_id', auth.validateJWT, productsController.editProduct); 
 app.delete('/products/:_id', auth.validateJWT, productsController.deleteProduct);
 app.put('/products/:_id/image', auth.validateJWT, uploadd.single('image'), upload.uploadMiddleware);
+
+app.post('/invetory', invetoryController.createInvetory);
+app.get('/invetory', invetoryController.getInvetory);
+
+app.get('/prodcutsandingredient', productsController.getProductAndIngredient);
 
 app.listen(3000, () => console.log(`app rodando na porta ${3000}`));

@@ -57,4 +57,10 @@ const editProdut = async(_id, name, price, ingredients, image) => {
 	return edit;
 };
 
-module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProdut };
+const getProductAndIngredient = async() => {
+	const get = await productsModel.productAndIngredient();
+	return get;
+};
+
+            
+module.exports = { createProduct, getProduct, getProductById, deleteProduct, editProdut, getProductAndIngredient };
