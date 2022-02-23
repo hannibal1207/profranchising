@@ -28,4 +28,27 @@ const getInvetory = async() => {
 	return invetory;
 };
 
-module.exports = { createInvetory, getInvetory };
+const getInvetoryById = async(_id) => {
+	const findId = await invetoryModel.getInvetoryById(_id);
+	if (!findId) {
+		return {
+			code: 404,
+			message: 'product not found'
+		};
+	}
+	return findId;
+};
+
+const editInvetory = async(_id, ingredient, kg, price) => {
+	const verifica = verifyInputs(ingredient, kg, price);
+	if (verifica.message) return verifica; 
+	const edit = await invetoryModel.editInvetory(_id, ingredient, kg, price);
+	return edit;
+};
+
+const deleteInvetory = async(_id) => {
+	const deletee = await invetoryModel.deleteInvetory(_id);
+	return deletee;
+};
+
+module.exports = { createInvetory, getInvetory, getInvetoryById, editInvetory, deleteInvetory };
